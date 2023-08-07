@@ -1,5 +1,5 @@
 <template>
-    <div class="grid justify-items-center mt-12">
+    <div class="grid justify-items-center py-12  shadow-xl px-12 ">
         <div class="mb-6">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Email</label>

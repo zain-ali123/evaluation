@@ -10,7 +10,7 @@
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 ">About</a>
+                        <a href="/#/about" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 ">About</a>
                     </li>
                 </ul>
             </div>

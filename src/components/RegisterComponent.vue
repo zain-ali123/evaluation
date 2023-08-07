@@ -1,32 +1,32 @@
 
 <template>
-    <div class="grid justify-items-center px-32 py-12  shadow-lg">
+    <div class="grid justify-items-center px-32 py-8  shadow-lg">
 
-        <div class="mb-6">
+        <div class="mb-4">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Username</label>
             <input v-model="form.username" type="text" id="default-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <span v-if="errors.username" class="error">{{ errors.username }}</span>
         </div>
-        <div class="mb-6">
+        <div class="mb-4">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Email</label>
             <input v-model="form.email" type="text" id="default-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <span v-if="errors.email" class="error">{{ errors.email }}</span>
-        </div>
+        </div >
 
 
 
-        <div>
+        <div class="mb-4">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Password</label>
             <input type="password" v-model="form.password" id="default-input"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <span v-if="errors.password" class="error">{{ errors.password }}</span>
         </div>
-        <div>
+        <div class="mb-4">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
                 Password</label>
             <input type="password" v-model="form.confirmPassword" id="default-input"

@@ -2,12 +2,17 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    tasks:''
+    tasks: '',
+    alltasks:[],
   },
   getters: {
     getTasksList(state) {
       console.log("getter>>",state.tasks)
       return state.tasks
+    },
+       getAllTaskList(state) {
+      
+      return state.alltasks
     }
   },
   mutations: {
@@ -15,11 +20,15 @@ export default createStore({
       console.log('payload from settask >>>>',payload)
       state.tasks = payload
       
+    },
+    SET_ALL_TASKS(state, payload) {
+      state.alltasks=payload
     }
   },
   actions: {
-    async createTask(_,payload) {
-      const response = await localStorage.setItem(`${payload.id}`,`Title of task is ${payload.title} and task is ${payload.task}`)
+    async createTask({commit},payload) {
+      const response = await localStorage.setItem(`${payload.id}`, `Title of task is ${payload.title} and task is ${payload.task}`)
+      commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
       console.log(response)
     },
     async readTasks({commit},id) {
@@ -30,7 +39,8 @@ export default createStore({
     async deleteTask( _,id) {
      await localStorage.removeItem(`${id}`)
       
-    }
+    },
+ 
 
   }
 })

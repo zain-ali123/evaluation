@@ -1,7 +1,7 @@
 <template>
-    <div class="grid justify-items-center">
+    <div class="grid justify-items-center mt-24  ">
 
-        <p class="text-4xl "> Login To Tasks App</p>
+        <p class="text-4xl mb-8"> Login To Tasks App</p>
         <LoginComponent />
 
 
