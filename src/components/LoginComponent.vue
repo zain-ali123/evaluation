@@ -20,7 +20,7 @@
 
         <div class="mt-5">
             <span v-if="errors.credentials" class="error">{{ errors.credentials }}</span>
-            <CustomButton :onClick="Login" buttonName="Login "/>
+            <CustomButton @click="Login" buttonName="Login "/>
 
         </div>
     </div>
@@ -34,9 +34,13 @@
 <script>
 
 import router from '@/router';
+import CustomButton from './CustomButton.vue';
 
 export default {
     name: 'LoginComponent',
+    components: {
+        CustomButton
+    },
 
     data() {
         return {
@@ -92,7 +96,7 @@ export default {
 
             if (this.form.email == localStorage.getItem('email') && this.form.password == localStorage.getItem('password')) {
                 console.log(' valid credentials. Logging...');
-                router.push('/home');
+                router.push('/task');
 
             }
 

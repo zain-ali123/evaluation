@@ -110,6 +110,8 @@ export default {
                 localStorage.setItem('email', this.form.email),
                 localStorage.setItem('password', this.form.password)
                 console.log('Form is valid. Submitting...');
+                
+                this.$router.push('/');
             } else {
 
                 console.log('Form is invalid. Please correct the errors.');
