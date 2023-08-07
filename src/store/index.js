@@ -19,7 +19,7 @@ export default createStore({
   },
   actions: {
     async createTask(_,payload) {
-      const response = await localStorage.setItem(`${payload.id}`,payload.task)
+      const response = await localStorage.setItem(`${payload.id}`,`Title of task is ${payload.title} and task is ${payload.task}`)
       console.log(response)
     },
     async readTasks({commit},id) {
@@ -27,9 +27,9 @@ export default createStore({
       console.log(response)
       commit('SET_TASKS',response)
     },
-    async deleteTask( id) {
-      const response = await localStorage.removeItem(`${id}`)
-      console.log(response);
+    async deleteTask( _,id) {
+     await localStorage.removeItem(`${id}`)
+      
     }
 
   }
