@@ -6,10 +6,11 @@
                 <p class="">Task:{{ item.task }}</p>
                 <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton>
 
-                <select class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white" v-model="selected">
+                <select class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white" v-model="selected"  >
                     <option class="text-black bg-white" 
                     v-for="(statusOption, statusIndex) in status" 
                     :key="statusIndex"
+                    
                     :value="statusOption.name">
                         {{ statusOption.name }}
                     </option>
@@ -36,9 +37,9 @@ export default {
         return {
             id: null,
             status: [
-                { name: 'In-Progress', color: 'blue' },
-                { name: 'Complteted', color: 'green' },
-                { name: 'Pending', color: 'yellow' }
+                { name: 'In-Progress'},
+                { name: 'Complteted'},
+                { name: 'Pending' }
             ],
             selected: 'In-Progress', 
             
