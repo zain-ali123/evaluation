@@ -11,8 +11,9 @@ export default createStore({
       return state.tasks
     },
        getAllTaskList(state) {
-      
-      return state.alltasks
+
+         return state.alltasks
+         
     }
   },
   mutations: {
@@ -21,15 +22,15 @@ export default createStore({
       state.tasks = payload
       
     },
-    SET_ALL_TASKS(state, payload) {
-      state.alltasks=payload
-    }
+
   },
   actions: {
-    async createTask({commit},payload) {
-      const response = await localStorage.setItem(`${payload.id}`, `Title of task is ${payload.title} and task is ${payload.task}`)
-      commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
-      console.log(response)
+    async createTask(_,payload) {
+       await localStorage.setItem(`${payload.id}`, `Title:${payload.title} , Task:${payload.task}`)
+      // commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
+      this.state.alltasks.push({'task':payload.task , 'title':payload.title})
+      console.log(payload.task) 
+      // console.log(localStorage.getItem(`${payload.id}`))
     },
     async readTasks({commit},id) {
       const response = await localStorage.getItem(`${id}`)

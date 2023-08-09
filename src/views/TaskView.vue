@@ -9,9 +9,13 @@
     <router-link to="/task/delete">
         <CustomButton v-show="active" @click="hc" buttonName="Delete Task"/>
     </router-link>
-
+    <router-link to="/task/all">
+            <CustomButton v-show="active" @click="hc" buttonName="All Tasks"/>
+    </router-link>
 
 <router-view></router-view>
+
+
 <router-link to="/task">
         <CustomButton v-show="home" @click="hclick" buttonName="Back TO Home"/>
 </router-link>

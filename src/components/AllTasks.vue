@@ -1,18 +1,26 @@
 <template>
-    <div class="grid justify-items-center mt-12 card max-w-sm">
+    <div class="grid justify-items-center mt-12">
+        <li class="list mb-6 w-screen card" v-for="(item, index) in getTask" :key="index">
+            <div class="grid justify-items-stretch">
+                <p class=""> Title:{{ item.title }}</p>
+                <p class="">Task:{{ item.task }}</p>
+                <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton>
 
+                <select class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white" v-model="selected">
+                    <option class="text-black bg-white" 
+                    v-for="(statusOption, statusIndex) in status" 
+                    :key="statusIndex"
+                    :value="statusOption.name">
+                        {{ statusOption.name }}
+                    </option>
+                </select>
 
-
-        <!-- <div class="mb-6">
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Id</label>
-            <input v-model="id" placeholder="Enter Id for task " type="text" id="default-input"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        </div> -->
-        <CustomButton @click="getTask" buttonName="AllTasks"  />
-        <li v-for="item in getTask" :key="item">
-            <!-- <p>{{ item }}</p> -->
+                
+                <p v-show="selected" :style="{color:selected == 'In-Progress'? 'blue': selected == 'Complteted'? 'green': 'red'}">
+                    {{ selected }}
+                </p>
+            </div>
         </li>
-        <!-- <p>{{ getTask }}</p> -->
     </div>
 </template>
 
@@ -26,16 +34,29 @@ export default {
     },
     data() {
         return {
-            id: null
-
-        }
+            id: null,
+            status: [
+                { name: 'In-Progress', color: 'blue' },
+                { name: 'Complteted', color: 'green' },
+                { name: 'Pending', color: 'yellow' }
+            ],
+            selected: 'In-Progress', 
+            
+        };
     },
     methods: {
-    
+        delteTask(id) {
+            this.getTask.splice(id, 1);
+        }
     },
     computed: {
         ...mapGetters({ getTask: 'getAllTaskList' })
     }
-}
-
+};
 </script>
+
+<style scoped>
+.list {
+    list-style: none;
+}
+</style>
