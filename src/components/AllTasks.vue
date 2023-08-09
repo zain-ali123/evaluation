@@ -23,19 +23,24 @@
                     </div>
                 </div>
 
-                <select class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white" v-model="selected"  >
-                    <option class="text-black bg-white" 
-                    v-for="(statusOption, statusIndex) in status" 
-                    :key="statusIndex"
-                    
-                    :value="statusOption.name">
-                        {{ statusOption.name }}
-                    </option>
-                </select>
+         <select
+              class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white"
+              @change="handleSelectChange(index)"
+              v-model="item.status"
+            >
+              <option
+                class="text-black bg-white"
+                v-for="(statusOption, statusIndex) in status"
+                :key="statusIndex"
+                :value="statusOption.name"
+              >
+                {{ statusOption.name }}
+              </option>
+            </select>
 
                 
-                <p  :style="{color:selected == 'In-Progress'? 'blue': selected == 'Complteted'? 'green': 'red'}">
-                    {{ selected }}
+                <p  :style="{color:item.status == 'In-Progress'? 'blue': item.status == 'Complteted'? 'green': 'red'}">
+                    {{ item.status }}
                 </p>
             </div>
         </li>
@@ -60,8 +65,7 @@ export default {
                 { name: 'Complteted'},
                 { name: 'Pending' }
             ],
-            selected: 'In-Progress', 
-            // title: $store.state.allTasks[0].title,
+
             newData: {
                 title: null,
                 task :null
@@ -85,10 +89,10 @@ export default {
         },
         closePopup() {
             this.showPopup = false;
-
-
         },
-
+        handleSelectChange(index) {
+            this.getTask[index].status = event.target.value;
+        }
     },
     computed: {
         ...mapGetters({ getTask: 'getAllTaskList' })

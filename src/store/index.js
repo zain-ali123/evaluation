@@ -28,7 +28,7 @@ export default createStore({
     async createTask(_,payload) {
        await localStorage.setItem(`${payload.id}`, `Title:${payload.title} , Task:${payload.task}`)
       // commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
-      this.state.alltasks.push({'task':payload.task , 'title':payload.title})
+      this.state.alltasks.push({'task':payload.task , 'title':payload.title ,'status':'In-Progress'} )
       console.log(payload.task) 
       // console.log(localStorage.getItem(`${payload.id}`))
     },
@@ -45,9 +45,7 @@ export default createStore({
       console.log('index from component>>>',id)
       console.log('data from component>>>', payload)
       this.state.alltasks[id]=payload
-      // this.state.alltasks[id] = null
-      // console.log(this.state.alltasks)
-      // this.state.alltasks.splice(id,0,payload)
+
     }
  
 
