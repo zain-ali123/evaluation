@@ -18,7 +18,7 @@
                                 <input v-model="newData.task" class="w-full px-4 py-2 border rounded-md">
                             </div>
                             <div class="flex justify-end">
-                                <button @click="closePopup" class="px-4 py-2 text-white bg-blue-500 rounded-md">Close</button>
+                                <CustomButton @click="closePopup" buttonName="Save Changes"></CustomButton>
                             </div>
                     </div>
                 </div>
