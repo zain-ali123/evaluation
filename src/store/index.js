@@ -41,6 +41,14 @@ export default createStore({
      await localStorage.removeItem(`${id}`)
       
     },
+    updateTask(_,{id,payload}) {
+      console.log('index from component>>>',id)
+      console.log('data from component>>>', payload)
+      this.state.alltasks[id]=payload
+      // this.state.alltasks[id] = null
+      // console.log(this.state.alltasks)
+      // this.state.alltasks.splice(id,0,payload)
+    }
  
 
   }
