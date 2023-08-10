@@ -4,8 +4,10 @@
             <div class="grid justify-items-stretch">
                 <p class=""> Title: {{ item.title }}</p>
                 <p class="">Task: {{ item.task }}</p>
+                <p class=""> price: {{ item.price }}</p>
                 <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton>
                 <CustomButton  @click="sendUpdate(index) " buttonName="Edit"></CustomButton> 
+                <CustomButton @click="addCart(index)" buttonName="ADD TO CART"></CustomButton> 
                 <div v-if="showPopup" class="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-900">
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h2 class="text-xl font-semibold mb-4">Popup</h2>
@@ -16,6 +18,10 @@
                             <div class="mb-4">
                                 <label class="block mb-1 font-medium">Task</label>
                                 <input v-model="newData.task" class="w-full px-4 py-2 border rounded-md">
+                            </div>
+                            <div class="mb-4">
+                                    <label class="block mb-1 font-medium">Task</label>
+                                    <input v-model="newData.price" class="w-full px-4 py-2 border rounded-md">
                             </div>
                             <div class="flex justify-end">
                                 <CustomButton @click="closePopup" buttonName="Save Changes"></CustomButton>
@@ -43,7 +49,7 @@
                     {{ item.status }}
                 </p>
             </div>
-        </li>
+        </li> 
         
     </div>
 </template>
@@ -68,7 +74,8 @@ export default {
 
             newData: {
                 title: null,
-                task :null
+                task: null,
+                price:null
             },
             showPopup: false,
             
@@ -76,12 +83,14 @@ export default {
     },
     methods: {
         ...mapActions({ update: 'updateTask' }),
+        ...mapActions({add:'addTOCart'}),
         delteTask(id) {
             this.getTask.splice(id, 1);
         },
         sendUpdate(index) {
             this.newData.title = this.getTask[index].title
             this.newData.task = this.getTask[index].task
+            this.newData.price = this.getTask[index].price
             console.log(this.newData)
             this.showPopup=true
             
@@ -92,6 +101,9 @@ export default {
         },
         handleSelectChange(index) {
             this.getTask[index].status = event.target.value;
+        },
+        addCart(id) {
+            this.add(id);
         }
     },
     computed: {

@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     tasks: '',
-    alltasks:[],
+    alltasks: [],
+    cart: []
   },
   getters: {
     getTasksList(state) {
@@ -14,7 +15,10 @@ export default createStore({
 
          return state.alltasks
          
-    }
+    },
+    getCart(state) {
+         return state.cart
+       }
   },
   mutations: {
     SET_TASKS(state, payload) {
@@ -28,8 +32,8 @@ export default createStore({
     async createTask(_,payload) {
        await localStorage.setItem(`${payload.id}`, `Title:${payload.title} , Task:${payload.task}`)
       // commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
-      this.state.alltasks.push({'task':payload.task , 'title':payload.title ,'status':'In-Progress'} )
-      console.log(payload.task) 
+      this.state.alltasks.push({'task':payload.task , 'title':payload.title,'price':payload.price ,'status':'In-Progress'} )
+      console.log(payload) 
       // console.log(localStorage.getItem(`${payload.id}`))
     },
     async readTasks({commit},id) {
@@ -46,6 +50,10 @@ export default createStore({
       console.log('data from component>>>', payload)
       this.state.alltasks[id]=payload
 
+    },
+    addTOCart(_,id) {
+      this.state.cart.push(this.state.alltasks[id])
+      console.log(this.state.cart)
     }
  
 

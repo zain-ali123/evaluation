@@ -8,6 +8,7 @@ import CreateTask from '../components/CreateTask.vue'
 import ReadTask from '../components/ReadTask.vue'
 import DeleteTask from '../components/DeleteTask.vue'
 import ALLTask from '../components/AllTasks.vue'
+import Cartview from '../views/CartView.vue'
 
 const routes = [
   {
@@ -53,6 +54,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component:AboutView
+  },
+    {
+    path: '/cart',
+    name: 'cart',
+    component:Cartview
   }
 ]
 

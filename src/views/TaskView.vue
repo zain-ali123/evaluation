@@ -19,7 +19,9 @@
 <router-link to="/task">
         <CustomButton v-show="home" @click="hclick" buttonName="Back TO Home"/>
 </router-link>
-
+<router-link to="/cart">
+        <CustomButton  buttonName="view cart"/>
+</router-link>
 
 </template>
 
