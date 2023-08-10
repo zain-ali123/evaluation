@@ -4,19 +4,21 @@ export default createStore({
   state: {
     tasks: '',
     alltasks: [],
-    cart: []
+    cart: [],
+    cartCount:null
   },
   getters: {
     getTasksList(state) {
       console.log("getter>>",state.tasks)
       return state.tasks
     },
-       getAllTaskList(state) {
-
-         return state.alltasks
+    getAllTaskList(state) {
+          return state.alltasks
          
     },
     getCart(state) {
+      state.cartCount = state.cart.length
+      console.log('items in cart now (getter) >>>>>>>',state.cartCount)
          return state.cart
        }
   },

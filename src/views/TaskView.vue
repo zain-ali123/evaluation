@@ -1,16 +1,16 @@
 <template>
 <NavBar/>
 <router-link to="/task/create">
-    <CustomButton v-show="active" @click="hc" buttonName="Create Task"/>
+    <CustomButton v-show="active" @click="hc" buttonName="Add Product"/>
 </router-link>
-    <router-link to="/task/read">
+    <!-- <router-link to="/task/read">
         <CustomButton v-show="active" @click="hc" buttonName="Read Task"/>
     </router-link>
     <router-link to="/task/delete">
         <CustomButton v-show="active" @click="hc" buttonName="Delete Task"/>
-    </router-link>
+    </router-link> -->
     <router-link to="/task/all">
-            <CustomButton v-show="active" @click="hc" buttonName="All Tasks"/>
+            <CustomButton v-show="active" @click="hc" buttonName="All Products"/>
     </router-link>
 
 <router-view></router-view>
@@ -19,7 +19,7 @@
 <router-link to="/task">
         <CustomButton v-show="home" @click="hclick" buttonName="Back TO Home"/>
 </router-link>
-<router-link to="/cart">
+<router-link  to="/cart">
         <CustomButton  buttonName="view cart"/>
 </router-link>
 
@@ -28,6 +28,7 @@
 <script>
 import NavBar from '../components/NavBar.vue';
 import CustomButton from '../components/CustomButton.vue';
+
 export default {
     components: {
         NavBar,
@@ -52,6 +53,7 @@ export default {
             this.home=false
             
         }
-    }
+    },
+
 }
 </script>
