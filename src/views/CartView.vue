@@ -1,23 +1,37 @@
 <template>
     <NavBar/>
-    <div class="p-4 shadow-lg grid justify-items-center shadow-lg">
-        <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-        <ul>
-            <li v-for="(item, index) in cart" :key="index" class="mb-4">
-                <p class="mb-2 text-lg font-semibold">{{ item.title }}</p>
-                <p class="text-gray-600">Description: {{ item.task }}</p>
-                <p class="text-gray-600">Price: Rs{{ item.price.toFixed(2) }}</p>
-                <CustomButton @click="remove(index)" buttonName="Remove"></CustomButton>
-            </li>
-        </ul>
+    <div class="w-full h-8 grid grid-cols-6 ">
+    <div class="col-span-2">PRODUCT</div>
+    <div class="col-span-1">NAME</div>
+    <div class="col-span-1">DESCRIPTION</div>
+    <div class="col-span-1">PRICE</div>
+    <div class="col-span-1"></div>
+    </div>
+    <div class="grid  grid-cols-1 gap-4 ">
+        <div 
+          v-for="(item, index) in cart"
+          :key="index"
+          class="  border rounded-lg overflow-hidden shadow-md h-40"
+        >
+          <div class="grid grid-cols-6 gap-4 ">
+            
+            <img :src="item.image" alt="Product Image" class="ml-14 col-span-2 w-40 h-40 object-cover" />
+
+            <h2 class="text-lg font-semibold col-span-1">  {{ item.title }}</h2>
+            <p class="text-gray-600 col-span-1">  {{ item.task }}</p>
+            <p class="mt-2 font-semibold col-span-1 ">RS {{ item.price.toFixed(2) }}</p>
+            <CustomButton class="col-span-1" @click="remove(index)" buttonName="Remove"></CustomButton>
+          </div>
+        </div>
+      
         <div v-if="cart.length > 0" class="mt-4">
-            <p class="text-xl font-bold">Total Bill: Rs{{ totalBill.toFixed(2) }}</p>
+          <p class="text-xl font-bold">SUBTOTAL: RS. {{ totalBill.toFixed(2) }}</p>
         </div>
         <router-link to="/task">
               <CustomButton  buttonName="Home"></CustomButton>
         </router-link>
-      
-    </div>
+      </div>
+    
 </template>
 
 <script>

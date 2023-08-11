@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex items-center justify-between p-4 bg-gray-200">
+    <nav class="flex items-center justify-between p-4 bg-gray-200 pb-4 mb-4">
         <div class="flex items-center">
              <router-link to="/task">
                 <div  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded ">Home</div>

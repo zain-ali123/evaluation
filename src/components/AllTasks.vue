@@ -1,13 +1,29 @@
 <template>
-    <div class="grid justify-items-center mt-12">
-        <li class="list mb-6 w-screen card" v-for="(item, index) in getTask" :key="index">
+    <div class="">
+        <!-- <li class="list mb-6 w-screen card" v-for="(item, index) in getTask" :key="index">
             <div class="grid justify-items-stretch">
                 <p class=""> Title: {{ item.title }}</p>
                 <p class="">Task: {{ item.task }}</p>
                 <p class=""> price: {{ item.price }}</p>
-                <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton>
-                <CustomButton  @click="sendUpdate(index) " buttonName="Edit"></CustomButton> 
+                <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton> -->
+        <div class="grid grid-cols-1 grid-cols-4 gap-4">
+            <div
+              v-for="(item, index) in getTask"
+              :key="index"
+              class="border rounded-lg overflow-hidden shadow-md"
+            >
+              <div class="p-4">
+                <img :src="item.image" alt="Product Image" class="w-60 h-50 object-cover" />
+
+                <h2 class="text-lg font-semibold">{{ item.title }}</h2>
+                <p class="text-gray-600">{{ item.task }}</p>
+                <p class="mt-2 font-semibold">RS {{ item.price.toFixed(2) }}</p>
+                <CustomButton @click="delteTask(index)" buttonName="Remove"></CustomButton>
+                <CustomButton  @click="sendUpdate(index)" buttonName="Edit"></CustomButton> 
                 <CustomButton @click="addCart(index)" buttonName="ADD TO CART"></CustomButton> 
+              </div>
+
+                
                 <div v-if="showPopup" class="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-900">
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h2 class="text-xl font-semibold mb-4">Popup</h2>
@@ -28,7 +44,7 @@
                             </div>
                     </div>
                 </div>
-
+<!--             
          <select
               class="pr-5 w-40 bg-blue-700 rounded-xl py-2 pl-5 text-white"
               @change="handleSelectChange(index)"
@@ -47,11 +63,13 @@
                 
                 <p  :style="{color:item.status == 'In-Progress'? 'blue': item.status == 'Complteted'? 'green': 'red'}">
                     {{ item.status }}
-                </p>
+                </p> -->
             </div>
-        </li> 
-        
+        </div>
     </div>
+         
+        
+    
 </template>
 
 <script>

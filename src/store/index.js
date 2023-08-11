@@ -5,7 +5,7 @@ export default createStore({
     tasks: '',
     alltasks: [],
     cart: [],
-    cartCount:null
+    cartCount:0
   },
   getters: {
     getTasksList(state) {
@@ -18,7 +18,7 @@ export default createStore({
     },
     getCart(state) {
       state.cartCount = state.cart.length
-      console.log('items in cart now (getter) >>>>>>>',state.cartCount)
+      // console.log('items in cart now (getter) >>>>>>>',state.cartCount)
          return state.cart
        }
   },
@@ -34,7 +34,7 @@ export default createStore({
     async createTask(_,payload) {
        await localStorage.setItem(`${payload.id}`, `Title:${payload.title} , Task:${payload.task}`)
       // commit('SET_ALL_TASKS', localStorage.getItem(`${payload.id}`))
-      this.state.alltasks.push({'task':payload.task , 'title':payload.title,'price':payload.price ,'status':'In-Progress'} )
+      this.state.alltasks.push({'task':payload.task , 'title':payload.title,'price':payload.price ,'status':'In-Progress' ,image:'https://static-01.daraz.pk/p/29c80a72b92449e6767f3188a2edb5ed.jpg'} )
       console.log(payload) 
       // console.log(localStorage.getItem(`${payload.id}`))
     },
