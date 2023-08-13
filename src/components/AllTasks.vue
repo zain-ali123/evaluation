@@ -17,10 +17,19 @@
 
                 <h2 class="text-lg font-semibold">{{ item.title }}</h2>
                 <p class="text-gray-600">{{ item.task }}</p>
-                <p class="mt-2 font-semibold">RS {{ item.price.toFixed(2) }}</p>
-                <CustomButton @click="delteTask(index)" buttonName="Remove"></CustomButton>
-                <CustomButton  @click="sendUpdate(index)" buttonName="Edit"></CustomButton> 
-                <CustomButton @click="addCart(index)" buttonName="ADD TO CART"></CustomButton> 
+                <div class="grid grid-cols-8">
+                     <p class="mt-5 font-semibold col-span-2 text-sm ">RS {{ item.price }}</p>
+                     
+                     <p class="col-span-3"></p>
+                    <CustomButton class="col-span-3" @click="addCart(item.itemId,index)" buttonName="Add to cart"></CustomButton> 
+                </div>
+               
+                <!-- <div class="">
+                    <CustomButton @click="delteTask(index)" buttonName="Remove"></CustomButton>
+                    <CustomButton  @click="sendUpdate(index)" buttonName="Edit"></CustomButton> 
+                </div> -->
+   
+                
               </div>
 
                 
@@ -31,12 +40,12 @@
                                 <label class="block mb-1 font-medium">Title</label>
                                 <input v-model="newData.title" class="w-full px-4 py-2 border rounded-md">
                             </div>
-                            <div class="mb-4">
-                                <label class="block mb-1 font-medium">Task</label>
+                            <div class="mb-4 h-40">
+                                <label class=" block mb-1 font-medium">Task</label>
                                 <input v-model="newData.task" class="w-full px-4 py-2 border rounded-md">
                             </div>
                             <div class="mb-4">
-                                    <label class="block mb-1 font-medium">Task</label>
+                                    <label class="block mb-1 font-medium">Price</label>
                                     <input v-model="newData.price" class="w-full px-4 py-2 border rounded-md">
                             </div>
                             <div class="flex justify-end">
@@ -109,7 +118,7 @@ export default {
             this.newData.title = this.getTask[index].title
             this.newData.task = this.getTask[index].task
             this.newData.price = this.getTask[index].price
-            console.log(this.newData)
+            console.log(this.newData) 
             this.showPopup=true
             
             this.update({id :index, payload :this.newData})
@@ -120,8 +129,10 @@ export default {
         handleSelectChange(index) {
             this.getTask[index].status = event.target.value;
         },
-        addCart(id) {
-            this.add(id);
+        addCart(id,index) {
+            // console.log("id in allPAroducts view ", id)
+            // console.log('index is : ',index)
+            this.add({productId:id,index:index});
         }
     },
     computed: {

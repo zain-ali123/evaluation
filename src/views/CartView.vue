@@ -1,41 +1,60 @@
 <template>
     <NavBar/>
-    <div class="w-full h-8 grid grid-cols-6 ">
-    <div class="col-span-2">PRODUCT</div>
+    
+    <div class="w-full h-8 grid grid-cols-7 ">
+    <div class="col-span-1">PRODUCT</div>
     <div class="col-span-1">NAME</div>
     <div class="col-span-1">DESCRIPTION</div>
     <div class="col-span-1">PRICE</div>
-    <div class="col-span-1"></div>
+    <div class="col-span-1">Quantity</div>
     </div>
-    <div class="grid  grid-cols-1 gap-4 ">
-        <div 
-          v-for="(item, index) in cart"
-          :key="index"
-          class="  border rounded-lg overflow-hidden shadow-md h-40"
-        >
-          <div class="grid grid-cols-6 gap-4 ">
+    <div v-if="cart.length > 0">
+                <div class="grid  grid-cols-1 gap-4 ">
+            <div 
+              v-for="(item, index) in cart"
+              :key="index"
+              class="  border rounded-lg overflow-hidden shadow-md h-40"
+            >
+              <div class="grid grid-cols-7 gap-4 ">
             
-            <img :src="item.image" alt="Product Image" class="ml-14 col-span-2 w-40 h-40 object-cover" />
+                <img :src="item.image" alt="Product Image" class="ml-7 col-span-1 w-40 h-40 object-cover" />
 
-            <h2 class="text-lg font-semibold col-span-1">  {{ item.title }}</h2>
-            <p class="text-gray-600 col-span-1">  {{ item.task }}</p>
-            <p class="mt-2 font-semibold col-span-1 ">RS {{ item.price.toFixed(2) }}</p>
-            <CustomButton class="col-span-1" @click="remove(index)" buttonName="Remove"></CustomButton>
-          </div>
-        </div>
+                <h2 class="text-lg font-semibold col-span-1">  {{ item.title }}</h2>
+                <p class="text-gray-600 col-span-1">  {{ item.task }}</p>
+                <p class="mt-2 font-semibold col-span-1 ">RS {{ item.price}}</p>
+                <p class="col-span-1">{{ item.quantity }}</p>
+                <CustomButton class="col-span-1" @click="remove(index)" buttonName="-"></CustomButton>
+                <CustomButton class="col-span-1" @click="add(index)" buttonName="+"></CustomButton>
+              </div>
+            </div>
       
-        <div v-if="cart.length > 0" class="mt-4">
-          <p class="text-xl font-bold">SUBTOTAL: RS. {{ totalBill.toFixed(2) }}</p>
+            <div  class="mt-4">
+              <p class="text-xl font-bold">SUBTOTAL: RS. {{ totalBill }}</p>
+            </div>
+
         </div>
+
+    </div>
+    <div v-else class="flex flex-col items-center justify-center text-center">
+          <div>
+            <img
+              src="../assets/undraw_empty_cart_co35.png"
+              alt="empty cart"
+              class="max-w-full h-auto max-h-48 mx-auto"
+            />
+          </div>
+          <p class="font-semibold mt-2">Your Cart is Empty</p>
+        </div>
+
         <router-link to="/task">
               <CustomButton  buttonName="Home"></CustomButton>
         </router-link>
-      </div>
+      
     
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters,mapState, mapMutations } from 'vuex';
 import CustomButton from '@/components/CustomButton.vue';
 import NavBar from '../components/NavBar.vue';
 
@@ -45,19 +64,36 @@ export default {
     components: { CustomButton ,NavBar},
     computed: {
         ...mapGetters({ cart: 'getCart' }),
+        ...mapState({ count: 'cartCount' }),
+        
   totalBill() {
     let sum = 0;
 
-    for (let i = 0; i < this.cart.length; i++) {
-      sum += this.cart[i].price;
+      for (let i = 0; i < this.cart.length; i++) {
+        //   if (this.cart[i].quantity > 0) {
+
+        // }
+        let quantity = this.cart[i].quantity
+        let price = this.cart[i].price
+        let total=price*quantity
+      sum += total;
     }
 
     return sum;
   }
     },
     methods: {
+        ...mapMutations({ decrease: 'decrement' }),
+        ...mapMutations({ increase: 'increment' }),
         remove(index) {
-            this.cart.splice(index, 1);
+            this.decrease();
+            console.log('cart count is>>>>>>>>',this.count)
+            this.cart[index].quantity--;
+        },
+        add(index) {
+            this.increase();
+            console.log('cart count is>>>>>>>>', this.count)
+            this.cart[index].quantity++;
         }
     }
 };
