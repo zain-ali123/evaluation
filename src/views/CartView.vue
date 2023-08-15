@@ -70,9 +70,7 @@ export default {
     let sum = 0;
 
       for (let i = 0; i < this.cart.length; i++) {
-        //   if (this.cart[i].quantity > 0) {
 
-        // }
         let quantity = this.cart[i].quantity
         let price = this.cart[i].price
         let total=price*quantity
@@ -86,9 +84,14 @@ export default {
         ...mapMutations({ decrease: 'decrement' }),
         ...mapMutations({ increase: 'increment' }),
         remove(index) {
-            this.decrease();
-            console.log('cart count is>>>>>>>>',this.count)
-            this.cart[index].quantity--;
+            if (this.cart[index].quantity>0) {
+                this.decrease();
+                console.log('cart count is>>>>>>>>', this.count)
+                this.cart[index].quantity--;
+            } else {
+                this.cart.splice(index,1)
+            }
+
         },
         add(index) {
             this.increase();
