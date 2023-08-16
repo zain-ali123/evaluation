@@ -1,11 +1,5 @@
 <template>
-    <div class="">
-        <!-- <li class="list mb-6 w-screen card" v-for="(item, index) in getTask" :key="index">
-            <div class="grid justify-items-stretch">
-                <p class=""> Title: {{ item.title }}</p>
-                <p class="">Task: {{ item.task }}</p>
-                <p class=""> price: {{ item.price }}</p>
-                <CustomButton @click="delteTask(index)" buttonName="Delete Tasks"></CustomButton> -->
+    <div v-if="getTask.length>0" class="">
         <div class="grid grid-cols-1 grid-cols-4 gap-4">
             <div
               v-for="(item, index) in getTask"
@@ -20,14 +14,14 @@
                 <div class="grid grid-cols-8">
                      <p class="mt-5 font-semibold col-span-2 text-sm ">RS {{ item.price }}</p>
                      
-                     <p class="col-span-3"></p>
-                    <CustomButton class="col-span-3" @click="addCart(item.itemId,index)" buttonName="Add to cart"></CustomButton> 
+                     <!-- <p class="col-span-3"></p> -->
+                    <!-- <CustomButton class="col-span-3" @click="addCart(item.itemId,index)" buttonName="Add to cart"></CustomButton>  -->
                 </div>
                
-                <!-- <div class="">
+                <div class="">
                     <CustomButton @click="delteTask(index)" buttonName="Remove"></CustomButton>
                     <CustomButton  @click="sendUpdate(index)" buttonName="Edit"></CustomButton> 
-                </div> -->
+                </div>
    
                 
               </div>
@@ -36,17 +30,21 @@
                 <div v-if="showPopup" class="fixed inset-0 flex justify-center items-center bg-opacity-50 bg-gray-900">
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h2 class="text-xl font-semibold mb-4">Popup</h2>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <label class="block mb-1 font-medium">Title</label>
                                 <input v-model="newData.title" class="w-full px-4 py-2 border rounded-md">
                             </div>
-                            <div class="mb-4 h-40">
-                                <label class=" block mb-1 font-medium">Task</label>
-                                <input v-model="newData.task" class="w-full px-4 py-2 border rounded-md">
+                            <div class="mb-3 ">
+                                <label class=" block mb-1 font-medium">Description</label>
+                                <textarea v-model="newData.task" class="w-full px-4 py-2 border rounded-md"></textarea>
                             </div>
-                            <div class="mb-4">
+                            <div class="mb-3">
                                     <label class="block mb-1 font-medium">Price</label>
                                     <input v-model="newData.price" class="w-full px-4 py-2 border rounded-md">
+                            </div>
+                            <div class="mb-3">
+                                    <label class="block mb-1 font-medium">Update image url</label>
+                                    <input v-model="newData.image" class="w-full px-4 py-2 border rounded-md">
                             </div>
                             <div class="flex justify-end">
                                 <CustomButton @click="closePopup" buttonName="Save Changes"></CustomButton>
@@ -76,6 +74,17 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <div>
+            <img
+                      src="../assets/undraw_No_data_re_kwbl.png"
+                      alt="No Data"
+                      class="max-w-full h-auto max-h-48 mx-auto"
+            />
+                
+        </div>
+        <p class="font-semibold mt-2">No Products Added Yet :( </p>
+    </div>
          
         
     
@@ -102,7 +111,8 @@ export default {
             newData: {
                 title: null,
                 task: null,
-                price:null
+                price: null,
+                image:null
             },
             showPopup: false,
             
@@ -130,8 +140,6 @@ export default {
             this.getTask[index].status = event.target.value;
         },
         addCart(id,index) {
-            // console.log("id in allPAroducts view ", id)
-            // console.log('index is : ',index)
             this.add({productId:id,index:index});
         }
     },

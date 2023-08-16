@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 .card {
+    
     background-color: theme('colors.white');
     border-radius: theme('borderRadius.lg');
     padding: theme('spacing.6');

@@ -1,5 +1,6 @@
 <template>
-<NavBar/>
+<NavBar role="Admin"/>
+
 <router-link to="/task/create">
     <CustomButton v-show="active" @click="hc" buttonName="Add Product"/>
 </router-link>
@@ -19,9 +20,9 @@
 <router-link to="/task">
         <CustomButton v-show="home" @click="hclick" buttonName="Back TO Home"/>
 </router-link>
-<router-link  to="/cart">
+<!-- <router-link  to="/cart">
         <CustomButton  buttonName="view cart"/>
-</router-link>
+</router-link> -->
 
 </template>
 

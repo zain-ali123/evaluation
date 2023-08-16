@@ -1,17 +1,17 @@
 <template>
-    <nav class="flex items-center justify-between p-4 bg-gray-200 pb-4 mb-4">
+    <nav class="flex items-center justify-between p-4 bg-gray-200 ">
         <div class="flex items-center">
-             <router-link to="/task">
+             <router-link to="/">
                 <div  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded ">Home</div>
              </router-link>
             
-            <router-link to="/about">
+            <!-- <router-link to="/about">
                 <div class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 ">About</div>
-            </router-link>            
- 
+            </router-link>             -->
+            <div><p>{{ role }}</p></div>
         </div>
         <div class="md:ml-auto">
-            <!-- Cart Icon -->
+            
             <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer mr-2" viewBox="0 0 20 20"
                     fill="currentColor" @click="toggleCart">
@@ -32,6 +32,9 @@ export default {
   name: 'NavBar',
   computed: {
     ...mapState({ count: 'cartCount' })
+    },
+    props: {
+    role:String
   },
   data() {
     return {};

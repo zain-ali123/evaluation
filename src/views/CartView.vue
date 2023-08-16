@@ -46,8 +46,8 @@
           <p class="font-semibold mt-2">Your Cart is Empty</p>
         </div>
 
-        <router-link to="/task">
-              <CustomButton  buttonName="Home"></CustomButton>
+        <router-link to="/user">
+              <CustomButton  buttonName="Continue Shopping"></CustomButton>
         </router-link>
       
     

@@ -3,7 +3,7 @@
         <div class="mb-6">
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Email</label>
-            <input v-model="form.email" type="text" id="default-input"
+            <input v-model="form.email" type="text" 
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <span v-if="errors.email" class="error">{{ errors.email }}</span>
         </div>
@@ -13,7 +13,7 @@
         <div>
             <label for="Enter Character ID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter
                 Password</label>
-            <input type="password" v-model="form.password" id="default-input"
+            <input type="password" v-model="form.password" 
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <span v-if="errors.password" class="error">{{ errors.password }}</span>
         </div>
@@ -35,6 +35,8 @@
 
 import router from '@/router';
 import CustomButton from './CustomButton.vue';
+import { mapState, } from 'vuex';
+import store from '@/store';
 
 export default {
     name: 'LoginComponent',
@@ -54,8 +56,13 @@ export default {
 
         }
     },
+    computed: {
+       
+    },
+    
 
     methods: {
+        ...mapState({ auth: 'isAuthenticated' }) ,
         getForm(obj) {
             console.log(obj);
         },
@@ -95,8 +102,12 @@ export default {
 
 
             if (this.form.email == localStorage.getItem('email') && this.form.password == localStorage.getItem('password')) {
-                console.log(' valid credentials. Logging...');
-                router.push('/task');
+            
+                store.state.userAuth = true;
+                router.push('/user')
+               
+
+                
 
             }
 
@@ -104,6 +115,18 @@ export default {
                 this.count = this.count + 1;
                 this.errors.credentials = ' invalid credentials.Please enter correct credentials.';
                 console.log(' invalid credentials. Please enter correct credentials.');
+                
+            }
+            if (this.form.email == 'admin' && this.form.password == 'admin') {
+                store.state.isAuthenticated = true
+                router.push('/task');
+
+            }
+            else {
+                this.count = this.count + 1;
+                this.errors.credentials = ' invalid credentials.Please enter correct credentials.';
+                console.log(' invalid credentials. Please enter correct credentials.');
+                
             }
         },
 
@@ -124,13 +147,13 @@ export default {
 
     },
     mounted() {
-        console.log("im in mounted hoook")
+        // console.log("im in mounted hoook")
     },
     updated() {
-        console.log("im in updated hoook")
+        // console.log("im in updated hoook")
     },
     unmounted() {
-        console.log("im in unmounted hoook")
+        // console.log("im in unmounted hoook")
     },
 
 }
